@@ -1,0 +1,23 @@
+Man kan let generalise short term storage.
+
+Vi har muligheder:
+  - (1): som i dag: fast maxvol, freie, men identiske, start- og slutvol.
+  - (2): Flex-ideen: tilføj til (1): skabe sekvenser over hvilke der er energibalance. 
+  - (3): Variabel .up: tilføj til (1): profil for maxvol relativ til maxvol fra (1) (så defaultværdi er 1, der antages hvis intet andet er angivet; EPS for 0).
+         Denne kan bruges til at tvinge lageret til at være tomt i angivne perioder. (Terminologi e.g. STORATE(T)).
+         Evt. kan den mere simplet bare sættes til forskellig fra 1 (f.eks. eps) i visse T; evt. med STORATE lig INF i øvrige T, så haves min Flexide.
+         En lidt mere generel (men mere realistisk for visse anvendelser) mulighed ligger i at tilføje også en profil for minvol.
+  - (4): og for længere perioder end angivet i (1): det har jeg tankemæssigt på plads. 
+
+I øvrigt kunne (1) - (3) være inspiration til default data håndtering hvad angår STORATE, e.g.:
+$ifi     exist data\storage.inc $include data\storate.inc
+$ifi not exist data\storage.inc PUT ERRORFILE/LOGFILE "File data\STORATE.inc not found. Applying default value 1."/;
+$ifi not exist data\storage.inc STORATE(T) = 1; !! Default value
+
+
+
+
+----
+Kommentar om noget andet: 
+QhSOTVOLTLIM i BB4: Det skal fremgår af en kommentar, at den kun er aktiv hvis der er endogene investeringer.
+Hvis ikke, sættes QhSOTVOLTLIM.up i *sim
